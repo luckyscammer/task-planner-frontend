@@ -1,0 +1,29 @@
+:root {
+    /* Base colors */
+    --color-bg: hsl(220, 15%, 10%);
+    --color-surface: hsl(220, 15%, 15%);
+    --color-border: hsl(220, 10%, 30%);
+    --color-text: hsl(0, 0%, 90%);
+    --color-muted: hsl(0, 0%, 60%);
+
+    /* Primary color */
+    --color-primary: hsl(210, 90%, 60%);
+    --color-primary-hover: hsl(210, 90%, 70%);
+
+    /* Typography */
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+
+    /* Radius & Shadow */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
