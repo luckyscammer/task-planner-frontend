@@ -16,6 +16,13 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
       .finally(() => setLoading(false));
   }, []);
 
+  if (!Array.isArray(projects)) {
+    console.error('projects is not an array:', projects);
+    console.log(projects)
+    return <div>Invalid projects data</div>;
+  }
+
+
   return (
     <ProjectContext.Provider value={{ projects, loading, error }}>
       {children}

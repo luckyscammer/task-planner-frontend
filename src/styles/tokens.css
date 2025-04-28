@@ -13,6 +13,8 @@
     /* Typography */
     --font-size-base: 16px;
     --font-size-sm: 14px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
     --font-weight-normal: 400;
     --font-weight-bold: 600;
 
@@ -26,4 +28,22 @@
     --radius-sm: 6px;
     --radius-md: 12px;
     --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    /* Container width */
+    --container-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 14px;
+        --font-size-lg: 18px;
+        --font-size-xl: 20px;
+
+        --space-xs: 2px;
+        --space-sm: 4px;
+        --space-md: 8px;
+        --space-lg: 16px;
+
+        --container-width: 90%;
+    }
 }
