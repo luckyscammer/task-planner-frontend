@@ -1,0 +1,68 @@
+@import "@/styles/tokens.css";
+
+.page {
+    padding: var(--space-lg);
+}
+
+.heading {
+    margin: 0 0 var(--space-md);
+    font-size: 1.5rem;
+    color: var(--color-text);
+}
+
+.stats {
+    display: flex;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.stat {
+    text-align: center;
+}
+.stat strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--color-text);
+}
+.stat span {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+.filters {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+.filterBtn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    transition: background 0.2s, border-color 0.2s;
+}
+.filterBtn:hover {
+    background: var(--color-surface);
+}
+.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.loading,
+.error {
+    font-size: 1rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+.error {
+    color: #d9534f;
+}
+
+.headerActions {
+    margin-bottom: var(--space-md);
+}

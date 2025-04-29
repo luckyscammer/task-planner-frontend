@@ -1,7 +1,8 @@
+/** @type {import("prettier").Config} */
 const config = {
   bracketSpacing: true,
   jsxSingleQuote: true,
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: [],
   printWidth: 80,
   quoteProps: 'consistent',
   singleQuote: true,
