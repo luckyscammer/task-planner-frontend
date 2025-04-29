@@ -1,12 +1,15 @@
 import React from 'react';
 
-import LinkButton from "@/components/ui/LinkButton/LinkButton.tsx";
+import LinkButton from '@/components/ui/LinkButton/LinkButton';
 
-import classes from './NavBar.module.css';
+import styles from './NavBar.module.css';
 
 const NavBar: React.FC = () => (
-  <nav className={classes.navbar}>
-    <LinkButton path="/">На головну</LinkButton>
+  <nav className={styles.navbar}>
+    <div className={styles.container}>
+      <LinkButton path="/">На головну</LinkButton>
+      <LinkButton path="/users">Користувачі</LinkButton>
+    </div>
   </nav>
 );
 

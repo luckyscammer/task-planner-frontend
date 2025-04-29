@@ -1,0 +1,58 @@
+@import "@/styles/tokens.css";
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.email,
+.role {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+.actions {
+    margin-top: var(--space-sm);
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.edit {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.delete {
+    background: transparent;
+    border: none;
+    color: #d9534f;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.edit:hover,
+.delete:hover {
+    text-decoration: underline;
+}

@@ -5,6 +5,8 @@ import App from '@/App.tsx';
 import HomePage from '@/pages/HomePage';
 import ProjectPage from '@/pages/ProjectPage';
 import TaskPage from '@/pages/TaskPage.tsx';
+import UserFormPage from "@/pages/UserFormPage.tsx";
+import UsersPage from "@/pages/UsersPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,18 @@ const router = createBrowserRouter([
       {
         path: '/tasks/:taskId',
         element: <TaskPage />,
+      },
+      {
+        path: '/users',
+        element: <UsersPage />
+      },
+      {
+        path: '/users/new',
+        element: <UserFormPage />
+      },
+      {
+        path: '/users/:userId',
+        element: <UserFormPage />
       },
     ],
   },

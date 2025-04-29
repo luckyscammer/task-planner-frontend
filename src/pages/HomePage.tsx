@@ -1,4 +1,4 @@
-import ProjectsList from '@/components/cards/ProjectsList/ProjectsList';
+import ProjectsList from '@/components/layout/ProjectsList/ProjectsList';
 import { useProjects } from '@/hooks/projects/useProjects';
 
 const HomePage = () => {
