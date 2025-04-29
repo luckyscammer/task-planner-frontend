@@ -3,12 +3,14 @@ import { createContext, useContext } from 'react';
 import { Project } from '@/lib/types/project';
 
 interface ProjectContextType {
-  projects: Project[];
+  projects: (Project & { progress?: number })[];
   loading: boolean;
   error: string | null;
 }
 
-export const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
+export const ProjectContext = createContext<ProjectContextType | undefined>(
+  undefined,
+);
 
 export const useProjectContext = () => {
   const context = useContext(ProjectContext);

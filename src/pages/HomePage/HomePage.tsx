@@ -1,5 +1,5 @@
-import ProjectsList from '@/components/layout/ProjectsList/ProjectsList';
-import { useProjects } from '@/hooks/projects/useProjects';
+import ProjectsList from '@/components/layout/ProjectsList/ProjectsList.tsx';
+import { useProjects } from '@/hooks/projects/useProjects.ts';
 
 const HomePage = () => {
   const { projects, loading, error } = useProjects();

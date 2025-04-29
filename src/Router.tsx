@@ -2,11 +2,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
 
 import App from '@/App.tsx';
-import HomePage from '@/pages/HomePage';
-import ProjectPage from '@/pages/ProjectPage';
-import TaskPage from '@/pages/TaskPage.tsx';
-import UserFormPage from "@/pages/UserFormPage.tsx";
-import UsersPage from "@/pages/UsersPage.tsx";
+import HomePage from '@/pages/HomePage/HomePage.tsx';
+import ProjectPage from '@/pages/ProjectPage/ProjectPage.tsx';
+import TaskPage from '@/pages/TaskPage/TaskPage.tsx';
+import UserFormPage from "@/pages/UserFormPage/UserFormPage.tsx";
+import UsersPage from "@/pages/UsersPage/UsersPage.tsx";
 
 const router = createBrowserRouter([
   {

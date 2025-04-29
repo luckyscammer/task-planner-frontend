@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { deleteUser,getAllUsers } from '@/api/user';
-import UsersList from '@/components/layout/UsersList/UsersList';
-import { User } from '@/lib/types/user';
+import { deleteUser,getAllUsers } from '@/api/user.ts';
+import UsersList from '@/components/layout/UsersList/UsersList.tsx';
+import { User } from '@/lib/types/user.ts';
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

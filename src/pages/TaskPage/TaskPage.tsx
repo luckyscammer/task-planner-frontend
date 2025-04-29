@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getTaskById } from '@/api/task';
+import { getTaskById } from '@/api/task.ts';
 import LinkButton from "@/components/ui/LinkButton/LinkButton.tsx";
-import { Task } from '@/lib/types/task';
+import { Task } from '@/lib/types/task.ts';
 
 const TaskPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
