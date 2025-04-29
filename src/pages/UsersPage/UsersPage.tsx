@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { deleteUser, getAllUsers } from '@/api/user';
+import { getAllUsers } from '@/api/user';
+import { getTasksOfUser } from '@/api/user';
 import UsersList from '@/components/layout/UsersList/UsersList';
-import LinkButton from '@/components/ui/LinkButton/LinkButton';
+import LinkButton from '@/components/ui/LinkButton/LinkButton.tsx';
 import { User } from '@/lib/types/user';
 
+interface UserWithCount extends User {
+  taskCount: number;
+}
+
 const UsersPage: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<UserWithCount[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchUsers = () => {
-    setLoading(true);
-    getAllUsers()
-      .then(setUsers)
-      .catch(() => setError('Не вдалося завантажити користувачів'))
-      .finally(() => setLoading(false));
-  };
+  const fetchUsers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const base = await getAllUsers();
+      const withCounts = await Promise.all(
+        base.map(async (u) => {
+          const tasks = await getTasksOfUser(u.id);
+          return { ...u, taskCount: tasks.length };
+        }),
+      );
+      setUsers(withCounts);
+    } catch {
+      setError('Не вдалося завантажити користувачів');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  useEffect(fetchUsers, []);
-
-  const handleDelete = (userId: string) => {
-    deleteUser(userId)
-      .then(fetchUsers)
-      .catch(() => alert('Не вдалося видалити користувача'));
-  };
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   if (loading) return <div>Завантаження користувачів…</div>;
   if (error) return <div className='error'>{error}</div>;
@@ -34,7 +45,12 @@ const UsersPage: React.FC = () => {
       <div style={{ marginBottom: 16 }}>
         <LinkButton to='/users/new'>+ Додати виконавця</LinkButton>
       </div>
-      <UsersList users={users} onDelete={handleDelete} />
+      <UsersList
+        users={users}
+        onDelete={() => {
+          /*…*/
+        }}
+      />
     </div>
   );
 };

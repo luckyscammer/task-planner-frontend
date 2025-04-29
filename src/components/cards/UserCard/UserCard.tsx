@@ -5,12 +5,17 @@ import { User } from '@/lib/types/user';
 
 import styles from './UserCard.module.css';
 
+export interface UserWithCount extends User {
+  taskCount: number;
+}
+
 interface UserCardProps {
-  user: User;
+  user: UserWithCount;
+  taskCount: number;
   onDelete: (userId: string) => void;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, taskCount, onDelete }) => {
   const navigate = useNavigate();
 
   return (
@@ -18,6 +23,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
       <h3 className={styles.name}>{user.fullName}</h3>
       <p className={styles.email}>{user.email}</p>
       <p className={styles.role}>{user.role}</p>
+      <p className={styles.workload}>Завдань: {taskCount}</p>
 
       <div className={styles.actions}>
         <button
@@ -29,7 +35,9 @@ const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
         <button
           className={styles.delete}
           onClick={() => {
-            if (window.confirm(`Видалити користувача ${user.fullName}?`)) {
+            if (
+              window.confirm(`Видалити користувача ${user.fullName}?`)
+            ) {
               onDelete(user.id);
             }
           }}

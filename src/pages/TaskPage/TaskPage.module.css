@@ -30,20 +30,16 @@
     border: 1px solid #dc3545;
     border-radius: var(--radius-sm);
     padding: var(--space-xs) var(--space-sm);
-    font-size: var(--font-size-base);
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition: background 0.2s;
 }
-
 .deleteBtn:hover {
     background-color: #c82333;
-    border-color: #c82333;
 }
 
 .description {
-    font-size: var(--font-size-base);
-    color: var(--color-text);
     margin-bottom: var(--space-md);
+    color: var(--color-text);
 }
 
 .details > div {
@@ -72,8 +68,8 @@
 
 .sectionTitle {
     font-size: var(--font-size-lg);
-    color: var(--color-text);
     margin-bottom: var(--space-sm);
+    color: var(--color-text);
 }
 
 .assignmentsList {
@@ -83,12 +79,51 @@
 }
 
 .assignmentItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
     margin-bottom: var(--space-xs);
 }
 
-.assignedAt {
-    color: var(--color-muted);
-    margin-left: var(--space-xs);
+.unassignBtn {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.unassignBtn:hover {
+    color: #c82333;
+}
+
+.assignForm {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.select {
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.assignBtn {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.assignBtn:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
 }
 
 .footer {
@@ -96,13 +131,13 @@
 }
 
 .message {
-    font-size: var(--font-size-base);
-    color: var(--color-muted);
     text-align: center;
+    color: var(--color-muted);
+    margin: var(--space-lg) 0;
 }
 
 .error {
-    color: #dc3545;
-    font-size: var(--font-size-base);
     text-align: center;
+    color: #dc3545;
+    margin: var(--space-lg) 0;
 }
