@@ -12,8 +12,6 @@ interface ProjectTasksListProps {
 const ProjectTasksList: React.FC<ProjectTasksListProps> = ({ tasks }) => {
   return (
     <div>
-      <h2>Таски</h2>
-
       {tasks.length === 0 ? (
         <p>Тасків поки немає.</p>
       ) : (

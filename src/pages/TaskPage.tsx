@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link,useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { getTaskById } from '@/api/task';
+import LinkButton from "@/components/ui/LinkButton/LinkButton.tsx";
 import { Task } from '@/lib/types/task';
 
 const TaskPage: React.FC = () => {
@@ -39,12 +40,21 @@ const TaskPage: React.FC = () => {
       {task.description && <p>{task.description}</p>}
 
       <div style={{ marginTop: 16 }}>
-        <p><strong>Статус:</strong> {task.status}</p>
-        <p><strong>Прогрес:</strong> {task.progress}%</p>
+        <p>
+          <strong>Статус:</strong> {task.status}
+        </p>
+        <p>
+          <strong>Прогрес:</strong> {task.progress}%
+        </p>
         {task.deadline && (
-          <p><strong>Дедлайн:</strong> {new Date(task.deadline).toLocaleDateString()}</p>
+          <p>
+            <strong>Дедлайн:</strong>{' '}
+            {new Date(task.deadline).toLocaleDateString()}
+          </p>
         )}
-        <p><strong>Створено:</strong> {new Date(task.createdAt).toLocaleString()}</p>
+        <p>
+          <strong>Створено:</strong> {new Date(task.createdAt).toLocaleString()}
+        </p>
       </div>
 
       <div style={{ marginTop: 24 }}>
@@ -53,7 +63,8 @@ const TaskPage: React.FC = () => {
           <ul>
             {assignments.map((a) => (
               <li key={a.user.id}>
-                {a.user.fullName} (призначено: {new Date(a.assignedAt).toLocaleString()})
+                {a.user.fullName} (призначено:{' '}
+                {new Date(a.assignedAt).toLocaleString()})
               </li>
             ))}
           </ul>
@@ -63,7 +74,9 @@ const TaskPage: React.FC = () => {
       </div>
 
       <div style={{ marginTop: 24 }}>
-        <Link to={`/projects/${task.projectId}`}>← Повернутися до проекту</Link>
+        <LinkButton path={`/projects/${task.projectId}`}>
+          ← Повернутися до проекту
+        </LinkButton>
       </div>
     </div>
   );
