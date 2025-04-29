@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
-import { getTaskById } from '@/api/task';
+import { deleteTask,getTaskById } from '@/api/task';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
 import { Task } from '@/lib/types/task';
 
@@ -9,38 +9,60 @@ import styles from './TaskPage.module.css';
 
 const TaskPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
-  const [task, setTask] = useState<Task | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const [task, setTask]     = useState<Task | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState<string | null>(null);
 
   useEffect(() => {
     if (!taskId) return;
     setLoading(true);
     getTaskById(taskId)
-      .then((data) => setTask(data))
+      .then(setTask)
       .catch(() => setError('Не вдалося завантажити таск'))
       .finally(() => setLoading(false));
   }, [taskId]);
+
+  const handleDelete = async () => {
+    if (!task) return;
+    if (window.confirm(`Видалити таск “${task.name}”?`)) {
+      try {
+        await deleteTask(task.id);
+        navigate(`/projects/${task.projectId}`);
+      } catch {
+        alert('Не вдалося видалити таск');
+      }
+    }
+  };
 
   if (loading) return <div className={styles.message}>Завантаження таска…</div>;
   if (error)   return <div className={styles.error}>{error}</div>;
   if (!task)   return <div className={styles.message}>Таск не знайдено</div>;
 
   const assignments = task.assignments ?? [];
-  const isOverdue = task.deadline && new Date(task.deadline) < new Date();
+  const isOverdue = task.deadline ? new Date(task.deadline) < new Date() : false;
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>{task.name}</h1>
-        <LinkButton
-          to={`/tasks/${task.id}/edit`}
-          variant="secondary"
-          size="small"
-        >
-          Редагувати таск
-        </LinkButton>
-
+        <div className={styles.actions}>
+          <LinkButton
+            to={`/tasks/${task.id}/edit`}
+            variant="secondary"
+            size="small"
+          >
+            Редагувати
+          </LinkButton>
+          <button
+            type="button"
+            className={styles.deleteBtn}
+            onClick={handleDelete}
+          >
+            Видалити
+          </button>
+        </div>
       </div>
 
       {task.description && <p className={styles.description}>{task.description}</p>}
@@ -89,7 +111,9 @@ const TaskPage: React.FC = () => {
       </section>
 
       <div className={styles.footer}>
-        <LinkButton to={`/projects/${task.projectId}`}>← Повернутися до проекту</LinkButton>
+        <LinkButton to={`/projects/${task.projectId}`} size="small">
+          ← Повернутися до проекту
+        </LinkButton>
       </div>
     </div>
   );

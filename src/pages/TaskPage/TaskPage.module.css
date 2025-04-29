@@ -1,56 +1,69 @@
 @import "@/styles/tokens.css";
 
 .container {
-    padding: var(--space-lg);
-    max-width: 800px;
+    max-width: var(--container-width);
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
+    padding: var(--space-lg);
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--space-md);
 }
 
 .title {
-    margin: 0;
-    font-size: 2rem;
+    font-size: var(--font-size-xl);
     color: var(--color-text);
+    margin: 0;
 }
 
-.editBtn {
-    align-self: flex-start;
+.actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.deleteBtn {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #dc3545;
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.deleteBtn:hover {
+    background-color: #c82333;
+    border-color: #c82333;
 }
 
 .description {
-    font-size: 1rem;
-    color: var(--color-muted);
-    margin: 0;
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
 }
 
-.details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-md);
+.details > div {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
 }
 
 .label {
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     color: var(--color-text);
 }
 
 .value {
-    margin-left: var(--space-xs);
     color: var(--color-muted);
 }
 
 .overdue {
-    margin-left: var(--space-xs);
     color: #d9534f;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 }
 
 .assignmentsSection {
@@ -58,9 +71,9 @@
 }
 
 .sectionTitle {
-    margin: 0 0 var(--space-sm);
-    font-size: 1.25rem;
+    font-size: var(--font-size-lg);
     color: var(--color-text);
+    margin-bottom: var(--space-sm);
 }
 
 .assignmentsList {
@@ -70,14 +83,10 @@
 }
 
 .assignmentItem {
-    padding: var(--space-xs) 0;
-    border-bottom: 1px solid var(--color-border);
-    display: flex;
-    justify-content: space-between;
+    margin-bottom: var(--space-xs);
 }
 
 .assignedAt {
-    font-size: 0.85rem;
     color: var(--color-muted);
     margin-left: var(--space-xs);
 }
@@ -87,11 +96,13 @@
 }
 
 .message {
-    text-align: center;
+    font-size: var(--font-size-base);
     color: var(--color-muted);
+    text-align: center;
 }
 
 .error {
+    color: #dc3545;
+    font-size: var(--font-size-base);
     text-align: center;
-    color: #d9534f;
 }
