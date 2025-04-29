@@ -1,19 +1,34 @@
+import cn from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 
-import styles from '@/components/ui/LinkButton/LinkButton.module.css';
+import styles from './LinkButton.module.css';
 
-interface NavButtonProps {
-  path: string;
+export interface LinkButtonProps extends LinkProps {
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
   children: React.ReactNode;
 }
 
-const LinkButton: React.FC<NavButtonProps> = ({ path, children }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({
+  to,
+  children,
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  ...linkProps
+}) => {
+  const cls = cn(
+    styles.button,
+    styles[variant],
+    styles[size],
+    disabled && styles.disabled,
+  );
+
   return (
-    <Link to={path} className={styles.link}>
-      <button className={styles.button}>
-        {children}
-      </button>
+    <Link to={to} className={cls} {...linkProps}>
+      {children}
     </Link>
   );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import UserForm from '@/components/layout/UserForm/UserForm.tsx';
+import UserForm from '@/components/forms/UserForm/UserForm';
 
-const UserFormPage: React.FC = () => {
-  return (
-    <div style={{ padding: 16 }}>
-      <UserForm />
-    </div>
-  );
-};
+import styles from './UserFormPage.module.css';
+
+const UserFormPage: React.FC = () => (
+  <div className={styles.page}>
+    <UserForm />
+  </div>
+);
 
 export default UserFormPage;

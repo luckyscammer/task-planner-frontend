@@ -20,7 +20,7 @@ export interface Task {
 }
 
 export interface CreateTaskDto {
-  title: string;
+  name: string;
   description?: string;
   status?: Task['status'];
   projectId: string;
@@ -28,7 +28,7 @@ export interface CreateTaskDto {
 }
 
 export interface UpdateTaskDto {
-  title?: string;
+  name?: string;
   description?: string;
   status?: Task['status'];
   userId?: string;

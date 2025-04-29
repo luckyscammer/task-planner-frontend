@@ -62,3 +62,7 @@
 .error {
     color: #d9534f;
 }
+
+.headerActions {
+    margin-bottom: var(--space-md);
+}

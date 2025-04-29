@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import { deleteUser,getAllUsers } from '@/api/user.ts';
-import UsersList from '@/components/layout/UsersList/UsersList.tsx';
-import { User } from '@/lib/types/user.ts';
+import { deleteUser, getAllUsers } from '@/api/user';
+import UsersList from '@/components/layout/UsersList/UsersList';
+import LinkButton from '@/components/ui/LinkButton/LinkButton';
+import { User } from '@/lib/types/user';
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchUsers = () => {
     setLoading(true);
@@ -27,14 +27,12 @@ const UsersPage: React.FC = () => {
   };
 
   if (loading) return <div>Завантаження користувачів…</div>;
-  if (error)   return <div className="error">{error}</div>;
+  if (error) return <div className='error'>{error}</div>;
 
   return (
     <div style={{ padding: 16 }}>
       <div style={{ marginBottom: 16 }}>
-        <Link to="/users/new">
-          <button>+ Додати виконавця</button>
-        </Link>
+        <LinkButton to='/users/new'>+ Додати виконавця</LinkButton>
       </div>
       <UsersList users={users} onDelete={handleDelete} />
     </div>

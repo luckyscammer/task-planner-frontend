@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { getFilteredTasks } from '@/api/task.ts';
 import ProjectTasksList from '@/components/layout/ProjectTasksList/ProjectTasksList.tsx';
+import LinkButton from "@/components/ui/LinkButton/LinkButton.tsx";
 import { Task } from '@/lib/types/task.ts';
 
 import styles from './ProjectPage.module.css';
@@ -35,7 +36,7 @@ const ProjectPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, [projectId]);
 
-  if (loading) return <div className={styles.loading}>Loading tasks…</div>;
+  if (loading) return <div className={styles.loading}>Завантаження тасків...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
 
   const total = tasks.length;
@@ -49,6 +50,12 @@ const ProjectPage: React.FC = () => {
   return (
     <div className={styles.page}>
       <h1 className={styles.heading}>Таски проекту</h1>
+
+      <div className={styles.headerActions}>
+        <LinkButton to={`/projects/${projectId}/tasks/new`}>
+          + Додати таск
+        </LinkButton>
+      </div>
 
       <div className={styles.stats}>
         <div className={styles.stat}>
@@ -83,7 +90,7 @@ const ProjectPage: React.FC = () => {
         ))}
       </div>
 
-      <ProjectTasksList tasks={filtered} />
+      <ProjectTasksList tasks={filtered}/>
     </div>
   );
 };

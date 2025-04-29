@@ -7,8 +7,8 @@ import styles from './NavBar.module.css';
 const NavBar: React.FC = () => (
   <nav className={styles.navbar}>
     <div className={styles.container}>
-      <LinkButton path="/">На головну</LinkButton>
-      <LinkButton path="/users">Користувачі</LinkButton>
+      <LinkButton to="/">На головну</LinkButton>
+      <LinkButton to="/users">Користувачі</LinkButton>
     </div>
   </nav>
 );
