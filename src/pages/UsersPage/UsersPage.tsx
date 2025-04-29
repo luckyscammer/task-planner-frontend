@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { getAllUsers } from '@/api/user';
+import {deleteUser, getAllUsers} from '@/api/user';
 import { getTasksOfUser } from '@/api/user';
 import UsersList from '@/components/layout/UsersList/UsersList';
 import LinkButton from '@/components/ui/LinkButton/LinkButton.tsx';
@@ -37,6 +37,18 @@ const UsersPage: React.FC = () => {
     fetchUsers();
   }, [fetchUsers]);
 
+  const handleDelete = async (userId: string) => {
+    if (!window.confirm('Ви впевнені, що хочете видалити цього користувача?')) {
+      return;
+    }
+    try {
+      await deleteUser(userId);
+      await fetchUsers();
+    } catch {
+      alert('Не вдалося видалити користувача');
+    }
+  };
+
   if (loading) return <div>Завантаження користувачів…</div>;
   if (error) return <div className='error'>{error}</div>;
 
@@ -47,9 +59,7 @@ const UsersPage: React.FC = () => {
       </div>
       <UsersList
         users={users}
-        onDelete={() => {
-          /*…*/
-        }}
+        onDelete={handleDelete}
       />
     </div>
   );

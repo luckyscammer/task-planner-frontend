@@ -34,13 +34,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, taskCount, onDelete }) => {
         </button>
         <button
           className={styles.delete}
-          onClick={() => {
-            if (
-              window.confirm(`Видалити користувача ${user.fullName}?`)
-            ) {
-              onDelete(user.id);
-            }
-          }}
+          onClick={() => onDelete(user.id)}
         >
           Видалити
         </button>
