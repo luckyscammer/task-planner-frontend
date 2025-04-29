@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { createTask, getTaskById, updateTask } from '@/api/task';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
-import { Task } from '@/lib/types/task';
+import { CreateTaskDto, Task, UpdateTaskDto } from '@/lib/types/task';
 
 import styles from '@/styles/Form.module.css';
 
@@ -19,6 +19,7 @@ interface FormData {
   name: string;
   description: string;
   status: Task['status'];
+  deadline?: string;
 }
 
 const TaskForm: React.FC = () => {
@@ -37,6 +38,7 @@ const TaskForm: React.FC = () => {
     name: '',
     description: '',
     status: 'UNASSIGNED',
+    deadline: '',
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +50,10 @@ const TaskForm: React.FC = () => {
           name: t.name,
           description: t.description || '',
           status: t.status,
-        })
+          deadline: t.deadline
+            ? t.deadline.slice(0, 10) // YYYY-MM-DD
+            : '',
+        });
         setParentProjectId(t.projectId);
       })
       .catch(() => setError('Не вдалося завантажити таск'));
@@ -63,12 +68,29 @@ const TaskForm: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const raw = form.deadline;
+    const isoDeadline = raw ? new Date(raw).toISOString() : undefined;
+
     try {
       if (isEdit && taskId) {
-        await updateTask(taskId, form);
+        const updateDto: UpdateTaskDto = {
+          name: form.name,
+          description: form.description,
+          status: form.status,
+          deadline: isoDeadline,
+        };
+        await updateTask(taskId, updateDto);
         navigate(`/projects/${parentProjectId}`);
       } else if (projectId) {
-        await createTask({ ...form, projectId });
+        const createDto: CreateTaskDto = {
+          name: form.name,
+          description: form.description,
+          status: form.status,
+          projectId,
+          deadline: isoDeadline,
+        };
+        await createTask(createDto);
         navigate(`/projects/${projectId}`);
       }
     } catch {
@@ -121,6 +143,21 @@ const TaskForm: React.FC = () => {
             </option>
           ))}
         </select>
+      </label>
+
+
+      <label className={styles.field}>
+        Дедлайн
+        <input
+          type='date'
+          name='deadline'
+          value={form.deadline}
+          onChange={handleChange}
+          className={styles.input}
+        />
+        <small className={styles.hint}>
+          Залиште порожнім, щоб видалити дедлайн
+        </small>
       </label>
 
       <div className={styles.actions}>

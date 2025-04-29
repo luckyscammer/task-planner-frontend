@@ -25,6 +25,7 @@ export interface CreateTaskDto {
   status?: Task['status'];
   projectId: string;
   userId?: string;
+  deadline?: string;
 }
 
 export interface UpdateTaskDto {
@@ -32,4 +33,5 @@ export interface UpdateTaskDto {
   description?: string;
   status?: Task['status'];
   userId?: string;
+  deadline?: string;
 }

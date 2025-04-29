@@ -57,3 +57,8 @@
     color: #dc3545;
     font-size: var(--font-size-base);
 }
+
+.hint {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+}
