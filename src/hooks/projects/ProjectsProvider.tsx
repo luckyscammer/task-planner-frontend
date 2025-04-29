@@ -18,7 +18,6 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   if (!Array.isArray(projects)) {
     console.error('projects is not an array:', projects);
-    console.log(projects)
     return <div>Invalid projects data</div>;
   }
 

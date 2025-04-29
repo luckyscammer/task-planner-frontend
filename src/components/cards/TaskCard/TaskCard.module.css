@@ -1,0 +1,23 @@
+.card {
+    display: block;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 8px;
+}
+.title {
+    margin: 0 0 4px;
+}
+.desc {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+.meta span {
+    display: inline-block;
+    margin-right: 12px;
+    font-size: 0.8rem;
+    color: #666;
+}

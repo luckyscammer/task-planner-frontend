@@ -1,12 +1,22 @@
+import { TaskAssignment } from '@/lib/types/taskAssignment.ts';
+
+export type TaskStatus =
+  | 'UNASSIGNED'
+  | 'ASSIGNED'
+  | 'IN_PROGRESS'
+  | 'PENDING_REVIEW'
+  | 'COMPLETED';
+
 export interface Task {
   id: string;
   name: string;
   description?: string;
   projectId: string;
-  status: 'UNASSIGNED' | 'ASSIGNED' | 'IN_PROGRESS' | 'PENDING_REVIEW' | 'COMPLETED';
+  status: TaskStatus;
   deadline?: string;
   progress: number;
   createdAt: string;
+  assignments: TaskAssignment[];
 }
 
 export interface CreateTaskDto {

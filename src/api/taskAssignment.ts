@@ -1,5 +1,9 @@
-import {api} from "@/api/api.ts";
-import {AssignUserDto, TaskAssignment, UpdateAssignmentDto} from "@/lib/types/taskAssignmenr.ts";
+import { api } from '@/api/api.ts';
+import {
+  AssignUserDto,
+  TaskAssignment,
+  UpdateAssignmentDto,
+} from '@/lib/types/taskAssignment.ts';
 
 export async function assignUser(data: AssignUserDto) {
   const response = await api.post('/assignments', data);
