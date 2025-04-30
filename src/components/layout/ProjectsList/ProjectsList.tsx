@@ -11,7 +11,7 @@ interface ProjectsListProps {
 
 const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
   return (
-    <div style={{ padding: 16 }}>
+    <div className={styles.page}>
       <h1>Проекти</h1>
 
       {projects.length === 0 ? (

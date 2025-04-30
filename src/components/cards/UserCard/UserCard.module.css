@@ -56,3 +56,9 @@
 .delete:hover {
     text-decoration: underline;
 }
+
+.workload {
+    margin: 0;
+    font-size: var(--font-size-base);
+    color: var(--color-muted);
+}
