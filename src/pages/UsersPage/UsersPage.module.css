@@ -1,7 +1,7 @@
 @import "@/styles/tokens.css";
 
 .page {
-    max-width: var(--container-width);
+    max-width: 100vw;
     padding: var(--space-lg);
 }
 

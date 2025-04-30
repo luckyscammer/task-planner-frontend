@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { deleteTask,getTaskById } from '@/api/task';
+import { deleteTask, getTaskById } from '@/api/task';
 import { assignUser, unassignUser } from '@/api/taskAssignment';
 import { getAllUsers } from '@/api/user';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
+import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
 import { Task } from '@/lib/types/task';
 import { User } from '@/lib/types/user';
 
@@ -12,13 +13,13 @@ import styles from './TaskPage.module.css';
 
 const TaskPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
-  const navigate = useNavigate();
+  const navigate   = useNavigate();
 
-  const [task, setTask] = useState<Task | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
+  const [task, setTask]                   = useState<Task | null>(null);
+  const [users, setUsers]                 = useState<User[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<string>('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading]             = useState(false);
+  const [error, setError]                 = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     if (!taskId) return;
@@ -74,26 +75,23 @@ const TaskPage: React.FC = () => {
     }
   };
 
-  if (loading) return <div className={styles.message}>Завантаження…</div>;
-  if (error) return <div className={styles.error}>{error}</div>;
-  if (!task) return <div className={styles.message}>Таск не знайдено</div>;
+  if (loading) return <StatusMessage variant="loading">Завантаження…</StatusMessage>;
+  if (error)   return <StatusMessage variant="error">{error}</StatusMessage>;
+  if (!task)   return <StatusMessage variant="empty">Таск не знайдено</StatusMessage>;
 
-  const assignedIds = new Set(task.assignments.map((a) => a.user.id));
+  const assignedIds = new Set(task.assignments.map(a => a.user.id));
+  const isOverdue   = task.deadline ? new Date(task.deadline) < new Date() : false;
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>{task.name}</h1>
         <div className={styles.actions}>
-          <LinkButton
-            to={`/tasks/${task.id}/edit`}
-            variant='secondary'
-            size='small'
-          >
+          <LinkButton to={`/tasks/${task.id}/edit`} variant="secondary" size="small">
             Редагувати
           </LinkButton>
           <button
-            type='button'
+            type="button"
             className={styles.deleteBtn}
             onClick={handleDelete}
           >
@@ -102,9 +100,7 @@ const TaskPage: React.FC = () => {
         </div>
       </div>
 
-      {task.description && (
-        <p className={styles.description}>{task.description}</p>
-      )}
+      {task.description && <p className={styles.description}>{task.description}</p>}
 
       <div className={styles.details}>
         <div>
@@ -117,14 +113,8 @@ const TaskPage: React.FC = () => {
         </div>
         {task.deadline && (
           <div>
-            <span className={styles.label}>Дедлайн:</span>
-            <span
-              className={
-                new Date(task.deadline) < new Date()
-                  ? styles.overdue
-                  : styles.value
-              }
-            >
+            <span className={styles.label}>Дедлайн:</span>{' '}
+            <span className={isOverdue ? styles.overdue : styles.value}>
               {new Date(task.deadline).toLocaleDateString()}
             </span>
           </div>
@@ -141,11 +131,11 @@ const TaskPage: React.FC = () => {
         <h2 className={styles.sectionTitle}>Виконавці</h2>
         {task.assignments.length > 0 ? (
           <ul className={styles.assignmentsList}>
-            {task.assignments.map((a) => (
+            {task.assignments.map(a => (
               <li key={a.user.id} className={styles.assignmentItem}>
                 {a.user.fullName}
                 <button
-                  type='button'
+                  type="button"
                   className={styles.unassignBtn}
                   onClick={() => handleUnassign(a.user.id)}
                 >
@@ -155,27 +145,27 @@ const TaskPage: React.FC = () => {
             ))}
           </ul>
         ) : (
-          <p className={styles.message}>Немає призначених користувачів</p>
+          <StatusMessage variant="empty">Немає призначених користувачів</StatusMessage>
         )}
       </section>
 
       <div className={styles.assignForm}>
         <select
           value={selectedUserId}
-          onChange={(e) => setSelectedUserId(e.target.value)}
+          onChange={e => setSelectedUserId(e.target.value)}
           className={styles.select}
         >
-          <option value=''>Виберіть користувача…</option>
+          <option value="">Виберіть користувача…</option>
           {users
-            .filter((u) => !assignedIds.has(u.id))
-            .map((u) => (
+            .filter(u => !assignedIds.has(u.id))
+            .map(u => (
               <option key={u.id} value={u.id}>
                 {u.fullName}
               </option>
             ))}
         </select>
         <button
-          type='button'
+          type="button"
           className={styles.assignBtn}
           onClick={handleAssign}
           disabled={!selectedUserId}
@@ -185,7 +175,7 @@ const TaskPage: React.FC = () => {
       </div>
 
       <div className={styles.footer}>
-        <LinkButton to={`/projects/${task.projectId}`} size='small'>
+        <LinkButton to={`/projects/${task.projectId}`} size="small">
           ← Повернутися до проекту
         </LinkButton>
       </div>

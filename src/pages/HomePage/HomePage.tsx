@@ -1,17 +1,16 @@
-import ProjectsList from '@/components/layout/ProjectsList/ProjectsList.tsx';
-import { useProjects } from '@/hooks/projects/useProjects.ts';
+import React from 'react';
 
-const HomePage = () => {
+import ProjectsList from '@/components/layout/ProjectsList/ProjectsList';
+import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
+import { useProjects } from '@/hooks/projects/useProjects';
+
+const HomePage: React.FC = () => {
   const { projects, loading, error } = useProjects();
 
-  if (loading) return <div>Завантаження проектів...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <StatusMessage variant="loading">Завантаження проєктів…</StatusMessage>;
+  if (error)   return <StatusMessage variant="error">{error}</StatusMessage>;
 
-  return (
-    <>
-      <ProjectsList projects={projects} />
-    </>
-  );
+  return <ProjectsList projects={projects} />;
 };
 
 export default HomePage;

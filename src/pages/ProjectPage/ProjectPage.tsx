@@ -1,10 +1,10 @@
-// src/pages/ProjectPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getFilteredTasks } from '@/api/task';
 import ProjectTasksList from '@/components/layout/ProjectTasksList/ProjectTasksList';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
+import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
 import { Task } from '@/lib/types/task';
 
 import styles from './ProjectPage.module.css';
@@ -23,11 +23,11 @@ const STATUSES: Filter[] = [
 
 const ProjectPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  const [tasks, setTasks]             = useState<Task[]>([]);
-  const [loading, setLoading]         = useState(false);
-  const [error, setError]             = useState<string | null>(null);
-  const [filter, setFilter]           = useState<Filter>(ALL);
-  const [deadlineFilter, setDeadlineFilter] = useState<string>(''); // YYYY-MM-DD
+  const [tasks, setTasks]                 = useState<Task[]>([]);
+  const [loading, setLoading]             = useState(false);
+  const [error, setError]                 = useState<string | null>(null);
+  const [filter, setFilter]               = useState<Filter>(ALL);
+  const [deadlineFilter, setDeadlineFilter] = useState<string>('');
 
   useEffect(() => {
     if (!projectId) return;
@@ -38,26 +38,20 @@ const ProjectPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, [projectId]);
 
-  if (loading) return <div className={styles.loading}>Завантаження тасків...</div>;
-  if (error)   return <div className={styles.error}>{error}</div>;
+  if (loading) return <StatusMessage variant="loading">Завантаження тасків…</StatusMessage>;
+  if (error)   return <StatusMessage variant="error">{error}</StatusMessage>;
 
-  // базові статистики
   const total      = tasks.length;
   const completed  = tasks.filter(t => t.status === 'COMPLETED').length;
   const inProgress = tasks.filter(t => t.status === 'IN_PROGRESS').length;
   const active     = tasks.filter(t => t.status !== 'COMPLETED').length;
 
-  // застосуємо фільтр по статусу
   const byStatus = filter === ALL
     ? tasks
     : tasks.filter(t => t.status === filter);
 
-  // далі фільтруємо за дедлайном, якщо заданий
   const filtered = deadlineFilter
-    ? byStatus.filter(t => {
-      if (!t.deadline) return false;
-      return new Date(t.deadline) <= new Date(deadlineFilter);
-    })
+    ? byStatus.filter(t => t.deadline && new Date(t.deadline) <= new Date(deadlineFilter))
     : byStatus;
 
   return (
@@ -71,22 +65,10 @@ const ProjectPage: React.FC = () => {
       </div>
 
       <div className={styles.stats}>
-        <div className={styles.stat}>
-          <strong>{total}</strong>
-          <span>Усього</span>
-        </div>
-        <div className={styles.stat}>
-          <strong>{completed}</strong>
-          <span>Завершено</span>
-        </div>
-        <div className={styles.stat}>
-          <strong>{inProgress}</strong>
-          <span>В роботі</span>
-        </div>
-        <div className={styles.stat}>
-          <strong>{active}</strong>
-          <span>Активні</span>
-        </div>
+        <div className={styles.stat}><strong>{total}</strong><span>Усього</span></div>
+        <div className={styles.stat}><strong>{completed}</strong><span>Завершено</span></div>
+        <div className={styles.stat}><strong>{inProgress}</strong><span>В роботі</span></div>
+        <div className={styles.stat}><strong>{active}</strong><span>Активні</span></div>
       </div>
 
       <div className={styles.filters}>
@@ -103,7 +85,7 @@ const ProjectPage: React.FC = () => {
 
       <div className={styles.dateFilter}>
         <label>
-          Показати з дедлайном до:
+          Показати дедлайн до:
           <input
             type="date"
             value={deadlineFilter}
