@@ -1,0 +1,19 @@
+@import '@/styles/tokens.css';
+
+.message {
+    text-align: center;
+    margin: var(--space-lg) 0;
+    font-size: var(--font-size-base);
+}
+
+.loading {
+    color: var(--color-muted);
+}
+
+.error {
+    color: #dc3545;
+}
+
+.empty {
+    color: var(--color-text);
+}
