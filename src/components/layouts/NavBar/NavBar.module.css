@@ -1,0 +1,26 @@
+@import "@/styles/tokens.css";
+
+.navbar {
+    background-color: var(--color-bg);
+    padding: 8px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.links {
+    display: flex;
+    gap: 12px;
+}
+
+.brand {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+
+}

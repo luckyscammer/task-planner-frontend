@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { getTasksOfUser } from '@/api/taskAssignment';
 import { getAllUsers, searchUsers } from '@/api/user';
-import UsersList, { UserWithCount } from '@/components/layout/UsersList/UsersList';
+import UsersList, { UserWithCount } from '@/components/layouts/UsersList/UsersList';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
 import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
 

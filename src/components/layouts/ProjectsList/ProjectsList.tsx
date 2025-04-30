@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ProjectCard from '@/components/cards/ProjectCard/ProjectCard';
-import { Project } from '@/lib/types/project';
+import ProjectCard from '@/components/cards/ProjectCard/ProjectCard.tsx';
+import { Project } from '@/lib/types/project.ts';
 
 import styles from '@/styles/List.module.css';
 

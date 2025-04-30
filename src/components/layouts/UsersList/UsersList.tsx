@@ -1,7 +1,7 @@
 import React from 'react';
 
-import UserCard from '@/components/cards/UserCard/UserCard';
-import { User } from '@/lib/types/user';
+import UserCard from '@/components/cards/UserCard/UserCard.tsx';
+import { User } from '@/lib/types/user.ts';
 
 import styles from '@/styles/List.module.css';
 

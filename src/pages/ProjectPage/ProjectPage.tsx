@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getFilteredTasks } from '@/api/task';
-import ProjectTasksList from '@/components/layout/ProjectTasksList/ProjectTasksList';
+import ProjectTasksList from '@/components/layouts/ProjectTasksList/ProjectTasksList';
 import LinkButton from '@/components/ui/LinkButton/LinkButton';
 import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
 import { Task } from '@/lib/types/task';

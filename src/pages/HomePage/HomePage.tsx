@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ProjectsList from '@/components/layout/ProjectsList/ProjectsList';
+import ProjectsList from '@/components/layouts/ProjectsList/ProjectsList';
 import StatusMessage from '@/components/ui/StatusMessage/StatusMessage';
 import { useProjects } from '@/hooks/projects/useProjects';
 
