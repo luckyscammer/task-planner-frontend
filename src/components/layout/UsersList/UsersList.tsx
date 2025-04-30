@@ -16,8 +16,6 @@ interface UsersListProps {
 
 const UsersList: React.FC<UsersListProps> = ({ users, onDelete }) => (
   <div>
-    <h1>Користувачі</h1>
-
     {users.length === 0 ? (
       <p>Жодного виконавця не додано.</p>
     ) : (

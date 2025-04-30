@@ -1,0 +1,37 @@
+@import "@/styles/tokens.css";
+
+.page {
+    max-width: var(--container-width);
+    padding: var(--space-lg);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--space-sm);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.message {
+    text-align: center;
+    color: var(--color-muted);
+    margin-top: var(--space-md);
+}
+
+.error {
+    text-align: center;
+    color: #dc3545;
+    margin-top: var(--space-md);
+}

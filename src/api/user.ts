@@ -12,6 +12,13 @@ export async function getAllUsers() {
   return response.data;
 }
 
+export async function searchUsers(query: string) {
+  const response = await api.get<User[]>('/users', {
+    params: { search: query }
+  });
+  return response.data;
+}
+
 export async function getUserById(id: string) {
   const response = await api.get<User>(`/users/${id}`);
   return response.data;
